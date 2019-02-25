@@ -14,8 +14,6 @@ namespace MovieFinder.Client.Controllers
         public SampleDataController(IConfiguration configuration)
         {
             this.configuration = configuration;
-
-            var testAPIKey = configuration["APIAccessCode"];
         }
         private static string[] Summaries = new[]
         {

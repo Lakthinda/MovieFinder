@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MovieFinder.Client.Data;
+using MovieFinder.Client.Services;
 
 namespace MovieFinder.Client
 {
@@ -31,6 +31,8 @@ namespace MovieFinder.Client
 
             services.AddHttpClient<IMovieAPIClient<FilmWorldClient>, FilmWorldClient>();
             services.AddHttpClient<IMovieAPIClient<CinemaWorldClient>, CinemaWorldClient>();
+
+            services.AddScoped<IMovieFinderService, MovieFinderService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +47,13 @@ namespace MovieFinder.Client
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
+
+            //AutoMapper
+            AutoMapper.Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Data.Movie, Models.MovieDto>();
+                cfg.CreateMap<Data.MovieDetail, Models.MovieDetailDto>();
+            });
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
