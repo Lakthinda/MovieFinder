@@ -1,22 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import DisplayMovies from './DisplayMovies';
-import SearchMovie from './SearchMovie';
 import { bindActionCreators } from 'redux';
-import { actionCreators } from '../store/MoviesStore';
+import { actionCreators } from '../store/MovieDetailsStore';
 
-class MovieFinder extends React.Component{
+class MovieDetails extends React.Component{
   componentWillMount() {
     // This method runs when the component is first added to the page
-    this.props.requestMovies();
-    // console.log('this is called..');
+    this.props.requestForMovieDetails("");    
+  }
+
+  componentWillReceiveProps(props) {
+    this.props.requestForMovieDetails(props.match.params.movieTitle);
   }
   
     render(){
       return (
         <div>
-          {/* <SearchMovie /> */}
-          <DisplayMovies movies={this.props.movies} />
+          <div>
+            {this.props.movieDetails.title}            
+          </div>
           {this.props.isLoading ? <span>Loading...</span> : []}
         </div>
       );
@@ -24,6 +26,6 @@ class MovieFinder extends React.Component{
   }
 
   export default connect(
-     state => state.movies,
+     state => state.movieDetails,
      dispatch => bindActionCreators(actionCreators,dispatch)
-  )(MovieFinder);
+  )(MovieDetails);

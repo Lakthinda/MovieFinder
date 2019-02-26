@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import MovieFinder from './MovieFinder';
 
 const Home = () => (
-  <div className="container">
-    <h1>Movie Finder</h1>
+  <div>
+    <h1 className="header">Movie Finder</h1>
     <MovieFinder />
   </div>
 );

@@ -1,16 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const Movie = (props) => {
     return (
         <div className="card">
         <img className="card-img-top" 
-                 src={props.Poster}  
-             alt="{props.Title}" 
+                 src={props.poster}
+             alt="{props.title}" 
              />
         <div className="card-body">        
-        <p className="card-text">{props.Title}</p>
-        <p><button>Buy</button></p>
+        <p className="card-text">{props.title}</p>
+        <p><a className='btn btn-default' href={`/moviedetails/${props.title}`}>Buy Movie</a></p>
         </div>
       </div>
     )
