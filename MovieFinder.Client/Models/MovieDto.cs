@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace MovieFinder.Client.Models
+﻿namespace MovieFinder.Client.Models
 {
     /// <summary>
     /// MovieDto - to pass into UI
