@@ -1,27 +1,33 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import './DisplayMovies.css';
 
 const Movie = (props) => {
     return (
-        <div className="card">
+      <div className="col-sm-3 display-movie-col">
+      <a href={`/moviedetails/${props.title}`}>
+      <div className="card">
         <img className="card-img-top" 
-                 src={props.poster}
-             alt="{props.title}" 
-             />
+                 src={props.poster}                 
+                 onError={(e)=>{e.target.onerror = null; e.target.src="http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg"}}
+             alt={props.title} 
+             />        
         <div className="card-body">        
-        <p className="card-text">{props.title}</p>
-        <p><a className='btn btn-default' href={`/moviedetails/${props.title}`}>Buy Movie</a></p>
+        <p className="card-text">{props.title}</p>        
+        <p><a className='btn btn-default' href={`/moviedetails/${props.title}`}>Select Movie</a></p>
         </div>
+      </div>
+      </a>
       </div>
     )
   }
 
 const DisplayMovies = (props) => {
 	return (
-   	 <div className="card-columns">
+   	 <div>
     	  {props.movies.map(movie => <Movie {...movie} />)}
      </div>
+     
   )
 }
 

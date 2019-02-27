@@ -1,0 +1,18 @@
+﻿.card{
+    width: 200px;
+    border: 1px;
+    padding: 5px;   
+    border-style: solid;
+    border-spacing: 5px; 
+    margin-bottom: 15px;
+}
+.card-img-top{
+    width:190px;
+    height: 230px;    
+}
+a.card-text{
+    width:180px;
+}
+.display-movie-col{
+    margin-bottom: 5px;
+}

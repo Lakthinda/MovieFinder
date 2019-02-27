@@ -5,11 +5,15 @@ import { Col, Grid, Row } from 'react-bootstrap';
 export default props => (
   <Grid fluid>
     <Row>
-      {/* <Col sm={3}>
-        <NavMenu />
-      </Col> */}
-      <Col >
-        {props.children}
+      <Col sm={6}>
+      <div className="header">
+        Movie Finder
+      </div>
+      </Col>
+    </Row>
+    <Row>
+      <Col sm={6}>
+        {props.children}      
       </Col>
     </Row>
   </Grid>

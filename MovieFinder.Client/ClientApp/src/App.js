@@ -12,6 +12,5 @@ export default () => (
     <Route path='/moviedetails/:movieTitle?' component={MovieDetails} />
     <Route path='/counter' component={Counter} />
     <Route path='/fetchdata/:startDateIndex?' component={FetchData} />
-
   </Layout>
 );
