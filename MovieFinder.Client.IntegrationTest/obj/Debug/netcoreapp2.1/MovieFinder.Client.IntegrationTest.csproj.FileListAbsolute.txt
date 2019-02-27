@@ -9,3 +9,6 @@ C:\Projects\GitHub\MovieFinderWithReact\MovieFinder.Client.IntegrationTest\obj\D
 C:\Projects\GitHub\MovieFinderWithReact\MovieFinder.Client.IntegrationTest\obj\Debug\netcoreapp2.1\MovieFinder.Client.IntegrationTest.csproj.CoreCompileInputs.cache
 C:\Projects\GitHub\MovieFinderWithReact\MovieFinder.Client.IntegrationTest\obj\Debug\netcoreapp2.1\MovieFinder.Client.IntegrationTest.AssemblyInfoInputs.cache
 C:\Projects\GitHub\MovieFinderWithReact\MovieFinder.Client.IntegrationTest\obj\Debug\netcoreapp2.1\MovieFinder.Client.IntegrationTest.AssemblyInfo.cs
+C:\Projects\GitHub\MovieFinderWithReact\MovieFinder.Client.IntegrationTest\bin\Debug\netcoreapp2.1\MovieFinder.Client.IntegrationTest.pdb
+C:\Projects\GitHub\MovieFinderWithReact\MovieFinder.Client.IntegrationTest\obj\Debug\netcoreapp2.1\MovieFinder.Client.IntegrationTest.dll
+C:\Projects\GitHub\MovieFinderWithReact\MovieFinder.Client.IntegrationTest\obj\Debug\netcoreapp2.1\MovieFinder.Client.IntegrationTest.pdb

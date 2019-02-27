@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace MovieFinder.Client.Data
 {
+    /// <summary>
+    /// IMovieAPIClient use in both APIs
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface IMovieAPIClient <T>
     {
         Task<IEnumerable<Movie>> GetMovieList(CancellationToken cancellationToken);

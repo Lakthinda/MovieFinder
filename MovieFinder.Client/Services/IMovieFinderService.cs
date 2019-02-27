@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MovieFinder.Client.Services
 {
+    /// <summary>
+    /// Interfance for MovieFinderService
+    /// </summary>
     public interface IMovieFinderService
     {
         Task<IEnumerable<Movie>> GetDistinctMovieList();
