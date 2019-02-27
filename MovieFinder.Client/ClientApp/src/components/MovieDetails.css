@@ -1,0 +1,26 @@
+﻿
+.display-movies .card{
+    width: 600px;
+    border: 1px;
+    padding: 5px;   
+    border-style: solid;
+    border-spacing: 5px; 
+    margin-bottom: 15px;
+}
+.display-movies .card-img-top{
+    width:590px;
+    height: 400px;    
+}
+.display-movies .card-title{
+    font-weight: bold;
+    font-size: 2em;
+}
+.display-movies .card-subtitle{
+    font-weight: bold;
+    font-size: 1.5em;
+}
+.display-movies .card-footer{
+    font-weight: bold;
+    font-size: 1.5em;   
+    margin-left: 10px;
+}

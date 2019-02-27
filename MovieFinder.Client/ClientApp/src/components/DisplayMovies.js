@@ -4,7 +4,7 @@ import './DisplayMovies.css';
 
 const Movie = (props) => {
     return (
-      <div className="col-sm-3 display-movie-col">
+      <div className="display-movie-col col-sm-4">
       <a href={`/moviedetails/${props.title}`}>
       <div className="card">
         <img className="card-img-top" 
