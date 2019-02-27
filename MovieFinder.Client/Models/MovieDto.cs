@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace MovieFinder.Client.Models
 {
+    /// <summary>
+    /// MovieDto - to pass into UI
+    /// </summary>
     public class MovieDto
     {
         public string ID { get; set; }

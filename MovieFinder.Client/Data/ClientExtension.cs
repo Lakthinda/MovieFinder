@@ -4,8 +4,17 @@ using System.IO;
 
 namespace MovieFinder.Client.Data
 {
+    /// <summary>
+    /// Extension Class use for API Clients
+    /// </summary>
     public static class ClientExtensions
     {
+        /// <summary>
+        /// Returns object in specified type from Stream
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="stream"></param>
+        /// <returns></returns>
         public static T ReadAndDeserializeFromJson<T>(this Stream stream)
         {
             if (stream == null)

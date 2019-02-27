@@ -2,6 +2,9 @@
 
 namespace MovieFinder.Client.Models
 {
+    /// <summary>
+    /// MovieDetailDTO - To pass into UI
+    /// </summary>
     public class MovieDetailDto
     {
         public string ID { get; set; }

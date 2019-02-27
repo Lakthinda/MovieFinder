@@ -47,6 +47,7 @@ namespace MovieFinder.Client
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
+                        
 
             //AutoMapper
             AutoMapper.Mapper.Initialize(cfg =>

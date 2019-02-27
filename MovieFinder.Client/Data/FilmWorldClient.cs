@@ -9,12 +9,22 @@ using System.Threading.Tasks;
 
 namespace MovieFinder.Client.Data
 {
+    /// <summary>
+    /// FilmWorldClient - Individual HttpClient
+    /// Calls filmworld API
+    /// Use HttpClient from HttpClient pool
+    /// </summary>
     public class FilmWorldClient : IMovieAPIClient<FilmWorldClient>
     {
         private readonly IConfiguration configuration;
         private readonly HttpClient client;
         private readonly string APIKey;
         private readonly string APIURL;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="configuration"></param>
+        /// <param name="client"></param>
         public FilmWorldClient(IConfiguration configuration,HttpClient client)
         {
             this.configuration = configuration;
@@ -36,6 +46,12 @@ namespace MovieFinder.Client.Data
             this.client.Timeout = new TimeSpan(0, 0, 30);
             this.client.DefaultRequestHeaders.Clear();
         }
+        /// <summary>
+        /// Returns moviedetail object based on movie ID
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <param name="ID"></param>
+        /// <returns></returns>
         public async Task<MovieDetail> GetMovieDetails(CancellationToken cancellationToken, string ID)
         {
             var request = new HttpRequestMessage(
@@ -55,6 +71,11 @@ namespace MovieFinder.Client.Data
             }
         }
 
+        /// <summary>
+        /// Returns list of movies
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public async Task<IEnumerable<Movie>> GetMovieList(CancellationToken cancellationToken)
         {
             var request = new HttpRequestMessage(

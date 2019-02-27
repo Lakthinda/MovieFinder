@@ -7,26 +7,42 @@ using MovieFinder.Client.Data;
 
 namespace MovieFinder.Client.Services
 {
+    /// <summary>
+    /// MovieFinderService use both <see cref="CinemaWorldClient"/> and <see cref="FilmWorldClient"/> services
+    /// </summary>
     public class MovieFinderService : IMovieFinderService
     {
         private readonly IMovieAPIClient<CinemaWorldClient> cinemaWorldClient;
         private readonly IMovieAPIClient<FilmWorldClient> filmWorldClient;
         private static CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-        
+
+        /// <summary>
+        /// Constructor - use both <see cref="CinemaWorldClient"/> and <see cref="FilmWorldClient"/> services
+        /// </summary>
+        /// <param name="cinemaWorldClient"></param>
+        /// <param name="filmWorldClient"></param>
         public MovieFinderService(IMovieAPIClient<CinemaWorldClient> cinemaWorldClient, IMovieAPIClient<FilmWorldClient> filmWorldClient)
         {
             this.cinemaWorldClient = cinemaWorldClient;
             this.filmWorldClient = filmWorldClient;
         }
-
+        /// <summary>
+        /// Returns list of movies ordered by Year
+        /// </summary>
+        /// <returns> x</returns>
         public async Task<IEnumerable<Movie>> GetDistinctMovieList()
         {
             var combinedMovieList = await GetCombinedMovieList();
-            var distinctMovieList = combinedMovieList.GroupBy(m => m.Title).Select(x => x.First());
+            var distinctMovieList = combinedMovieList.GroupBy(m => m.Title).Select(x => x.First()).OrderByDescending(o => o.Year);
 
             return distinctMovieList;
         }
 
+        /// <summary>
+        /// Returns MovieDetail object
+        /// </summary>
+        /// <param name="movieTitle"></param>
+        /// <returns></returns>
         public async Task<MovieDetail> GetCheapestMovieDetailsByTitle(string movieTitle = "")
         {
             var combinedMovieList = await GetCombinedMovieList();
@@ -45,6 +61,10 @@ namespace MovieFinder.Client.Services
 
             return cheapestMovie;
         }
+        /// <summary>
+        /// Returns a list of movies from both APIs ignoring any errors
+        /// </summary>
+        /// <returns></returns>
         private async Task<IEnumerable<Movie>> GetCombinedMovieList()
         {
             IEnumerable<Movie> cinemaWorldMovies = null;
@@ -70,7 +90,11 @@ namespace MovieFinder.Client.Services
             var completeMovieList = (filmWorldMovies ?? Enumerable.Empty<Movie>()).Concat(cinemaWorldMovies ?? Enumerable.Empty<Movie>());
             return completeMovieList;
         }
-
+        /// <summary>
+        /// Search Movies by ID and Returns movie object ignoring any errors
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
         private async Task<MovieDetail> GetMovieDetails(string ID)
         {
             MovieDetail movieDetail = null;

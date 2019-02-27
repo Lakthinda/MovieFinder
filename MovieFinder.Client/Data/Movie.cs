@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace MovieFinder.Client.Data
+﻿namespace MovieFinder.Client.Data
 {
+    /// <summary>
+    /// Movie data object
+    /// </summary>
     public class Movie
     {
         public string ID { get; set; }

@@ -2,6 +2,9 @@
 
 namespace MovieFinder.Client.Data
 {
+    /// <summary>
+    /// MovieDetail data object
+    /// </summary>
     public class MovieDetail
     {
         public string ID { get; set; }

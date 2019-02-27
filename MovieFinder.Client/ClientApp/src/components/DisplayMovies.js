@@ -13,7 +13,7 @@ const Movie = (props) => {
              alt={props.title} 
              />        
         <div className="card-body">        
-        <p className="card-text">{props.title}</p>        
+        <p className="card-text">{props.title} - {props.year}</p>        
         <p><a className='btn btn-default' href={`/moviedetails/${props.title}`}>Select Movie</a></p>
         </div>
       </div>

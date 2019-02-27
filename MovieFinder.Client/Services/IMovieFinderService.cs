@@ -10,7 +10,5 @@ namespace MovieFinder.Client.Services
     {
         Task<IEnumerable<Movie>> GetDistinctMovieList();
         Task<MovieDetail> GetCheapestMovieDetailsByTitle(string movieTitle = "");
-
-        //Task<IEnumerable<Movie>> GetMovieList(HttpClient client);
     }
 }
