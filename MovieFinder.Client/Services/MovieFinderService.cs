@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using MovieFinder.Client.Data;
 
 namespace MovieFinder.Client.Services
@@ -14,6 +15,7 @@ namespace MovieFinder.Client.Services
     {
         private readonly IMovieAPIClient<CinemaWorldClient> cinemaWorldClient;
         private readonly IMovieAPIClient<FilmWorldClient> filmWorldClient;
+        private readonly ILogger<MovieFinderService> logger;
         private static CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
         /// <summary>
@@ -21,10 +23,13 @@ namespace MovieFinder.Client.Services
         /// </summary>
         /// <param name="cinemaWorldClient"></param>
         /// <param name="filmWorldClient"></param>
-        public MovieFinderService(IMovieAPIClient<CinemaWorldClient> cinemaWorldClient, IMovieAPIClient<FilmWorldClient> filmWorldClient)
+        public MovieFinderService(IMovieAPIClient<CinemaWorldClient> cinemaWorldClient, 
+                                  IMovieAPIClient<FilmWorldClient> filmWorldClient,
+                                  ILogger<MovieFinderService> logger)
         {
             this.cinemaWorldClient = cinemaWorldClient;
             this.filmWorldClient = filmWorldClient;
+            this.logger = logger;
         }
         /// <summary>
         /// Returns list of movies ordered by Year
@@ -75,7 +80,8 @@ namespace MovieFinder.Client.Services
             }
             catch (Exception e)
             {
-                //TODO log error
+                logger.LogError("CinemaWorldClient.GetMovieList()- Exception occured", e);
+
             }
 
             try
@@ -84,7 +90,7 @@ namespace MovieFinder.Client.Services
             }
             catch (Exception e)
             {
-                //TODO log error
+                logger.LogError("FilmWorldClient.GetMovieList()- Exception occured", e);
             }
 
             var completeMovieList = (filmWorldMovies ?? Enumerable.Empty<Movie>()).Concat(cinemaWorldMovies ?? Enumerable.Empty<Movie>());
@@ -107,7 +113,7 @@ namespace MovieFinder.Client.Services
                 }
                 catch (Exception e)
                 {
-                    //TODO error log
+                    logger.LogError("CinemaWorldClient.GetMovieDetails()- Exception occured", e);
                 }
             }
             else
@@ -119,7 +125,7 @@ namespace MovieFinder.Client.Services
                 }
                 catch (Exception e)
                 {
-                    //TODO error log
+                    logger.LogError("FilmWorldClient.GetMovieDetails()- Exception occured", e);
                 }
             }
 

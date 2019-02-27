@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace MovieFinder.Client.Data
     {
         private readonly IConfiguration configuration;
         private readonly HttpClient client;
+        private readonly ILogger<CinemaWorldClient> logger;
         private readonly string APIKey;
         private readonly string APIURL;
         /// <summary>
@@ -25,20 +27,25 @@ namespace MovieFinder.Client.Data
         /// </summary>
         /// <param name="configuration"></param>
         /// <param name="client"></param>
-        public CinemaWorldClient(IConfiguration configuration,HttpClient client)
+        public CinemaWorldClient(IConfiguration configuration,
+                                 HttpClient client,
+                                 ILogger<CinemaWorldClient> logger)
         {
             this.configuration = configuration;
             this.client = client;
+            this.logger = logger;
 
             APIURL = configuration["MovieFinder.APIURL"];
             if (string.IsNullOrEmpty(APIURL) || !Uri.IsWellFormedUriString(APIURL,UriKind.Absolute))
             {
+                logger.LogCritical($"APIURL - {APIURL} not found or Not a valid URL.");
                 throw new KeyNotFoundException("APIURL not found or Not a valid URL.");
             }
             
             APIKey = configuration["MovieFinder.APIKey"];
             if (string.IsNullOrEmpty(APIKey))
             {
+                logger.LogCritical($"APIKey not found.");
                 throw new KeyNotFoundException("APIKey not found.");
             }
 

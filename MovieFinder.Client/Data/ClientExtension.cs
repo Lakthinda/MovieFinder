@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.IO;
 
@@ -8,7 +9,7 @@ namespace MovieFinder.Client.Data
     /// Extension Class use for API Clients
     /// </summary>
     public static class ClientExtensions
-    {
+    {        
         /// <summary>
         /// Returns object in specified type from Stream
         /// </summary>

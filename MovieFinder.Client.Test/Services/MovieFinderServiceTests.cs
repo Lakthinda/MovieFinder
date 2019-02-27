@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Moq;
 using Moq.Protected;
 using MovieFinder.Client.Data;
@@ -18,7 +19,10 @@ namespace MovieFinder.Client.Test
     {
         private IMovieFinderService sut;
         private Mock<IConfiguration> configuration;
-        
+        private readonly Mock<ILogger<CinemaWorldClient>> cinemaWorldClientlogger = new Mock<ILogger<CinemaWorldClient>>();
+        private readonly Mock<ILogger<FilmWorldClient>> filmWorldClientlogger = new Mock<ILogger<FilmWorldClient>>();
+        private readonly Mock<ILogger<MovieFinderService>> movieFinderServicelogger = new Mock<ILogger<MovieFinderService>>();
+
         public MovieFinderServiceTests()
         {
             configuration = new Mock<IConfiguration>();
@@ -45,13 +49,13 @@ namespace MovieFinder.Client.Test
                         StatusCode = HttpStatusCode.Forbidden
                     });
             var httpClient = new HttpClient(unAuthorisedResponseHttpMessageHandler.Object);
-            IMovieAPIClient<CinemaWorldClient> cinemaWorldClient = new CinemaWorldClient(configuration.Object, httpClient);
+            IMovieAPIClient<CinemaWorldClient> cinemaWorldClient = new CinemaWorldClient(configuration.Object, httpClient, cinemaWorldClientlogger.Object);
             // Mock filmWorldClient with data
             Mock<IMovieAPIClient<FilmWorldClient>> filmWorldClient = new Mock<IMovieAPIClient<FilmWorldClient>>();
             filmWorldClient.Setup(c => c.GetMovieList(It.IsAny<CancellationToken>()))
                            .ReturnsAsync(testMovieList);
 
-            sut = new MovieFinderService(cinemaWorldClient,filmWorldClient.Object);
+            sut = new MovieFinderService(cinemaWorldClient,filmWorldClient.Object,movieFinderServicelogger.Object);
 
             //Act
             var result = await sut.GetDistinctMovieList();
@@ -78,13 +82,13 @@ namespace MovieFinder.Client.Test
                         StatusCode = HttpStatusCode.InternalServerError
                     });
             var httpClient = new HttpClient(unAuthorisedResponseHttpMessageHandler.Object);
-            IMovieAPIClient<FilmWorldClient> filmWorldClient = new FilmWorldClient(configuration.Object, httpClient);
+            IMovieAPIClient<FilmWorldClient> filmWorldClient = new FilmWorldClient(configuration.Object, httpClient,filmWorldClientlogger.Object);
             // Mock filmWorldClient with data
             Mock<IMovieAPIClient<CinemaWorldClient>> cinemaWorldClient = new Mock<IMovieAPIClient<CinemaWorldClient>>();
             cinemaWorldClient.Setup(c => c.GetMovieList(It.IsAny<CancellationToken>()))
                            .ReturnsAsync(testMovieList);
 
-            sut = new MovieFinderService(cinemaWorldClient.Object, filmWorldClient);
+            sut = new MovieFinderService(cinemaWorldClient.Object, filmWorldClient,movieFinderServicelogger.Object);
 
             //Act
             var result = await sut.GetDistinctMovieList();
@@ -108,7 +112,7 @@ namespace MovieFinder.Client.Test
             filmWorldClient.Setup(c => c.GetMovieList(It.IsAny<CancellationToken>()))
                            .ReturnsAsync(testMovieList);
 
-            sut = new MovieFinderService(cinemaWorldClient.Object, filmWorldClient.Object);
+            sut = new MovieFinderService(cinemaWorldClient.Object, filmWorldClient.Object,movieFinderServicelogger.Object);
 
             //Act
             var result = await sut.GetDistinctMovieList();
@@ -136,7 +140,7 @@ namespace MovieFinder.Client.Test
             filmWorldClient.Setup(c => c.GetMovieList(It.IsAny<CancellationToken>()))
                            .ReturnsAsync(testMovieListExtra);// Extra Movies
 
-            sut = new MovieFinderService(cinemaWorldClient.Object, filmWorldClient.Object);
+            sut = new MovieFinderService(cinemaWorldClient.Object, filmWorldClient.Object,movieFinderServicelogger.Object);
 
             //Act
             var result = await sut.GetDistinctMovieList();
@@ -170,7 +174,7 @@ namespace MovieFinder.Client.Test
             filmWorldClient.Setup(c => c.GetMovieDetails(It.IsAny<CancellationToken>(), It.IsAny<string>()))
                            .ReturnsAsync(filmWorldMovieDetail);
 
-            sut = new MovieFinderService(cinemaWorldClient.Object, filmWorldClient.Object);
+            sut = new MovieFinderService(cinemaWorldClient.Object, filmWorldClient.Object,movieFinderServicelogger.Object);
 
             //Act
             var result = await sut.GetCheapestMovieDetailsByTitle("Test movie");
@@ -198,7 +202,7 @@ namespace MovieFinder.Client.Test
                         StatusCode = HttpStatusCode.Forbidden
                     });
             var httpClient = new HttpClient(unAuthorisedResponseHttpMessageHandler.Object);
-            IMovieAPIClient<CinemaWorldClient> cinemaWorldClient = new CinemaWorldClient(configuration.Object, httpClient);
+            IMovieAPIClient<CinemaWorldClient> cinemaWorldClient = new CinemaWorldClient(configuration.Object, httpClient, cinemaWorldClientlogger.Object);
 
             // Mock filmWorldClient with data
             Mock<IMovieAPIClient<FilmWorldClient>> filmWorldClient = new Mock<IMovieAPIClient<FilmWorldClient>>();
@@ -207,7 +211,7 @@ namespace MovieFinder.Client.Test
             filmWorldClient.Setup(c => c.GetMovieDetails(It.IsAny<CancellationToken>(), It.IsAny<string>()))
                            .ReturnsAsync(filmWorldMovieDetail);
 
-            sut = new MovieFinderService(cinemaWorldClient, filmWorldClient.Object);
+            sut = new MovieFinderService(cinemaWorldClient, filmWorldClient.Object, movieFinderServicelogger.Object);
 
             //Act
             var result = await sut.GetCheapestMovieDetailsByTitle("Test movie");
@@ -235,7 +239,7 @@ namespace MovieFinder.Client.Test
                         StatusCode = HttpStatusCode.InternalServerError
                     });
             var httpClient = new HttpClient(unAuthorisedResponseHttpMessageHandler.Object);
-            IMovieAPIClient<FilmWorldClient> filmWorldClient = new FilmWorldClient(configuration.Object, httpClient);
+            IMovieAPIClient<FilmWorldClient> filmWorldClient = new FilmWorldClient(configuration.Object, httpClient, filmWorldClientlogger.Object);
             // Mock filmWorldClient with data
             Mock<IMovieAPIClient<CinemaWorldClient>> cinemaWorldClient = new Mock<IMovieAPIClient<CinemaWorldClient>>();
             cinemaWorldClient.Setup(c => c.GetMovieList(It.IsAny<CancellationToken>()))
@@ -243,7 +247,7 @@ namespace MovieFinder.Client.Test
             cinemaWorldClient.Setup(c => c.GetMovieDetails(It.IsAny<CancellationToken>(), It.IsAny<string>()))
                            .ReturnsAsync(cinemaWorldMovieDetail);
 
-            sut = new MovieFinderService(cinemaWorldClient.Object, filmWorldClient);
+            sut = new MovieFinderService(cinemaWorldClient.Object, filmWorldClient, movieFinderServicelogger.Object);
 
             //Act
             var result = await sut.GetCheapestMovieDetailsByTitle("Test movie");

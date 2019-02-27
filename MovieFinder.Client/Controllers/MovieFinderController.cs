@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using MovieFinder.Client.Models;
 using MovieFinder.Client.Services;
 
@@ -15,9 +16,12 @@ namespace MovieFinder.Client.Controllers
     public class MovieFinderController : Controller
     {
         private readonly IMovieFinderService movieFinderService;
-        public MovieFinderController(IMovieFinderService movieFinderService)
+        private readonly ILogger<MovieFinderController> logger;
+        public MovieFinderController(IMovieFinderService movieFinderService, 
+                                     ILogger<MovieFinderController> logger)
         {
-            this.movieFinderService = movieFinderService;            
+            this.movieFinderService = movieFinderService;
+            this.logger = logger;
         }
 
         /// <summary>
@@ -43,6 +47,7 @@ namespace MovieFinder.Client.Controllers
             var movie = await movieFinderService.GetCheapestMovieDetailsByTitle(title);
             if(movie == null)
             {
+                logger.LogInformation($"Movie with title {title} has not been found.");
                 return NotFound();
             }
 

@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Moq;
 using MovieFinder.Client.Data;
 using System;
@@ -11,6 +12,7 @@ namespace MovieFinder.Client.Test
     public class FilmWorldClientTests
     {
         private Mock<IConfiguration> configuration;
+        private readonly Mock<ILogger<FilmWorldClient>> filmWorldClientlogger = new Mock<ILogger<FilmWorldClient>>();
 
         [Fact]
         public void Constructor_With_EmptyAPIURL()
@@ -23,7 +25,7 @@ namespace MovieFinder.Client.Test
 
 
             //Act
-            Action action = () => new FilmWorldClient(configuration.Object,client.Object);
+            Action action = () => new FilmWorldClient(configuration.Object,client.Object,filmWorldClientlogger.Object);
             
             //Assert
             var exception = Assert.Throws<KeyNotFoundException>(action);
@@ -41,7 +43,7 @@ namespace MovieFinder.Client.Test
 
 
             //Act
-            Action action = () => new FilmWorldClient(configuration.Object, client.Object);
+            Action action = () => new FilmWorldClient(configuration.Object, client.Object, filmWorldClientlogger.Object);
 
             //Assert
             var exception = Assert.Throws<KeyNotFoundException>(action);
@@ -61,7 +63,7 @@ namespace MovieFinder.Client.Test
 
 
             //Act
-            Action action = () => new FilmWorldClient(configuration.Object, client.Object);
+            Action action = () => new FilmWorldClient(configuration.Object, client.Object, filmWorldClientlogger.Object);
 
             //Assert
             var exception = Assert.Throws<KeyNotFoundException>(action);
@@ -81,7 +83,7 @@ namespace MovieFinder.Client.Test
 
 
             //Act
-            IMovieAPIClient<FilmWorldClient> sut = new FilmWorldClient(configuration.Object, client.Object);
+            IMovieAPIClient<FilmWorldClient> sut = new FilmWorldClient(configuration.Object, client.Object, filmWorldClientlogger.Object);
 
             //Assert
             Assert.NotNull(sut);

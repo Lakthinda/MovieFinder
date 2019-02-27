@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Moq;
 using MovieFinder.Client.Data;
 using System;
@@ -11,7 +12,8 @@ namespace MovieFinder.Client.Test
     public class CinemaWorldClientTests
     {
         private Mock<IConfiguration> configuration;
-
+        private readonly Mock<ILogger<CinemaWorldClient>> cinemaWorldClientlogger = new Mock<ILogger<CinemaWorldClient>>();
+                
         [Fact]
         public void Constructor_With_EmptyAPIURL()
         {
@@ -23,7 +25,7 @@ namespace MovieFinder.Client.Test
 
 
             //Act
-            Action action = () => new CinemaWorldClient(configuration.Object,client.Object);
+            Action action = () => new CinemaWorldClient(configuration.Object,client.Object,cinemaWorldClientlogger.Object);
             
             //Assert
             var exception = Assert.Throws<KeyNotFoundException>(action);
@@ -41,7 +43,7 @@ namespace MovieFinder.Client.Test
 
 
             //Act
-            Action action = () => new CinemaWorldClient(configuration.Object, client.Object);
+            Action action = () => new CinemaWorldClient(configuration.Object, client.Object, cinemaWorldClientlogger.Object);
 
             //Assert
             var exception = Assert.Throws<KeyNotFoundException>(action);
@@ -61,7 +63,7 @@ namespace MovieFinder.Client.Test
 
 
             //Act
-            Action action = () => new CinemaWorldClient(configuration.Object, client.Object);
+            Action action = () => new CinemaWorldClient(configuration.Object, client.Object, cinemaWorldClientlogger.Object);
 
             //Assert
             var exception = Assert.Throws<KeyNotFoundException>(action);
@@ -81,7 +83,7 @@ namespace MovieFinder.Client.Test
 
 
             //Act
-            IMovieAPIClient<CinemaWorldClient> sut = new CinemaWorldClient(configuration.Object, client.Object);
+            IMovieAPIClient<CinemaWorldClient> sut = new CinemaWorldClient(configuration.Object, client.Object, cinemaWorldClientlogger.Object);
 
             //Assert
             Assert.NotNull(sut);

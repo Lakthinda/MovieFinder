@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using MovieFinder.Client.Data;
 using MovieFinder.Client.Services;
+using NLog.Extensions.Logging;
 
 namespace MovieFinder.Client
 {
@@ -36,8 +38,12 @@ namespace MovieFinder.Client
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddConsole();
+            loggerFactory.AddDebug();
+            loggerFactory.AddNLog();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
