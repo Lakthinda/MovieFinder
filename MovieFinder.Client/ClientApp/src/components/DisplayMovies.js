@@ -4,7 +4,7 @@ import './DisplayMovies.css';
 
 const Movie = (props) => {
     return (
-      <div className="display-movie-col col-sm-4">
+      <div key={props.uniqueId} className="display-movie-col col-sm-4" >
       <a href={`/moviedetails/${props.title}`}>
       <div className="card">
         <img className="card-img-top" 
@@ -14,7 +14,7 @@ const Movie = (props) => {
              />        
         <div className="card-body">        
         <p className="card-text">{props.title} - {props.year}</p>        
-        <p><a className='btn btn-default' href={`/moviedetails/${props.title}`}>Select Movie</a></p>
+        <p><button className='btn btn-default' href={`/moviedetails/${props.title}`}>Select Movie</button></p>
         </div>
       </div>
       </a>
