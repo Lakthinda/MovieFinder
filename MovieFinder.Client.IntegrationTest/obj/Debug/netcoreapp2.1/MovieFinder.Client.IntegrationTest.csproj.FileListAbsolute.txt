@@ -12,3 +12,8 @@ C:\Projects\GitHub\MovieFinderWithReact\MovieFinder.Client.IntegrationTest\obj\D
 C:\Projects\GitHub\MovieFinderWithReact\MovieFinder.Client.IntegrationTest\bin\Debug\netcoreapp2.1\MovieFinder.Client.IntegrationTest.pdb
 C:\Projects\GitHub\MovieFinderWithReact\MovieFinder.Client.IntegrationTest\obj\Debug\netcoreapp2.1\MovieFinder.Client.IntegrationTest.dll
 C:\Projects\GitHub\MovieFinderWithReact\MovieFinder.Client.IntegrationTest\obj\Debug\netcoreapp2.1\MovieFinder.Client.IntegrationTest.pdb
+C:\Projects\GitHub\MovieFinderWithReact\MovieFinder.Client.IntegrationTest\bin\Debug\netcoreapp2.1\MovieFinder.Client.Views.dll
+C:\Projects\GitHub\MovieFinderWithReact\MovieFinder.Client.IntegrationTest\bin\Debug\netcoreapp2.1\MovieFinder.Client.Views.pdb
+C:\Projects\GitHub\MovieFinderWithReact\MovieFinder.Client.IntegrationTest\bin\Debug\netcoreapp2.1\MovieFinder.Client.dll
+C:\Projects\GitHub\MovieFinderWithReact\MovieFinder.Client.IntegrationTest\bin\Debug\netcoreapp2.1\MovieFinder.Client.pdb
+C:\Projects\GitHub\MovieFinderWithReact\MovieFinder.Client.IntegrationTest\obj\Debug\netcoreapp2.1\MovieFinder.Client.IntegrationTest.csproj.CopyComplete
