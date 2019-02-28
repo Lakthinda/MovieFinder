@@ -16,8 +16,8 @@ namespace MovieFinder.Client.IntegrationTest
 
 
         [Theory]
-        [InlineData("api/moviefinder/",Skip = "ToDO")]
-        [InlineData("/api/moviefinder/Star Wars: Episode III - Revenge of the Sith", Skip = "ToDO")]
+        [InlineData("api/moviefinder/")]
+        //[InlineData("/api/moviefinder/Star Wars: Episode III - Revenge of the Sith", Skip = "ToDO")]
         public async void GetMovies(string url)
         {
             // Arrange
